@@ -34,6 +34,9 @@ public class Settings extends Config
     public PROTECTION PROTECTION;
     @Create
     public SQL SQL;
+    @Create
+    public AUTH_DB AUTH_DB;
+
     @Comment(
         {
         "Сколько игроков/ботов должно зайти за 1 минуту, чтобы включилась защита",
@@ -234,5 +237,19 @@ public class Settings extends Config
         public String USER = "user";
         public String PASSWORD = "password";
         public String DATABASE = "database";
+    }
+
+    @Comment("Auth db settings")
+    public static class AUTH_DB {
+        @Comment("Database host")
+        public String DB_HOST = "localhost";
+        @Comment("Database port")
+        public int DB_PORT = 5432;
+        @Comment("Database name")
+        public String DB_NAME = "contest";
+        @Comment("Database user")
+        public String DB_USER = "user";
+        @Comment("Database password")
+        public String DB_PASSWORD = "secret";
     }
 }

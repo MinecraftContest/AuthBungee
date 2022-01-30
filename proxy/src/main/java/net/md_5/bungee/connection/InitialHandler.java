@@ -67,6 +67,7 @@ import net.md_5.bungee.protocol.packet.StatusRequest;
 import net.md_5.bungee.protocol.packet.StatusResponse;
 import net.md_5.bungee.util.AllowedCharacters;
 import net.md_5.bungee.util.QuietException;
+import ru.leymooo.botfilter.ReAuth;
 import ru.leymooo.botfilter.utils.FastException;
 import ru.leymooo.botfilter.utils.IPUtils;
 import ru.leymooo.botfilter.utils.PingLimiter;
@@ -514,14 +515,18 @@ public class InitialHandler extends PacketHandler implements PendingConnection
 
         }
 
-        //BotFilter start
-        if ( bungee.getBotFilter().isOnChecking( getName() ) )
-        {
-            disconnect( bungee.getTranslation( "already_connected_proxy" ) ); // TODO: Cache this disconnect packet
-            return;
-        }
+//        //BotFilter start
+//        if ( bungee.getBotFilter().isOnChecking( getName() ) )
+//        {
+//            disconnect( bungee.getTranslation( "already_connected_proxy" ) ); // TODO: Cache this disconnect packet
+//            return;
+//        }
 
-        offlineId = UUID.nameUUIDFromBytes( ( "OfflinePlayer:" + getName() ).getBytes( Charsets.UTF_8 ) );
+        name = ReAuth.generateConnectionName();
+        if (loginRequest != null) {
+            bungee.getLogger().info("Connection with name " + loginRequest.getData() + " to " + name);
+        }
+        offlineId = UUID.nameUUIDFromBytes( ( "Custom:" + getName() ).getBytes( Charsets.UTF_8 ) );
 
         PlayerSetUUIDEvent uuidEvent = new PlayerSetUUIDEvent( this, offlineId );
         //Because botfilter delayed a LoginEvent when player needs a check for a bot,
@@ -545,17 +550,9 @@ public class InitialHandler extends PacketHandler implements PendingConnection
         userCon.setCompressionThreshold( BungeeCord.getInstance().config.getCompressionThreshold() );
         //userCon.init();
 
-        sendLoginSuccess( sendLoginSuccess );
+        sendLoginSuccess( true ); // send loginSuccess
+        bungee.getBotFilter().connectToBotFilter( userCon );
 
-        if ( bungee.getBotFilter().needCheck( this ) )
-        {
-            sendLoginSuccess( !sendLoginSuccess ); //Send a loginSuccess if sendLoginSuccess is false
-            bungee.getBotFilter().connectToBotFilter( userCon );
-        } else
-        {
-            bungee.getBotFilter().saveUser( userCon.getName().toLowerCase(), IPUtils.getAddress( userCon ), false ); //update timestamp
-            finishLogin( userCon, sendLoginSuccess ); //if true, dont send again login success
-        }
     }
 
     public void finishLogin(UserConnection userCon, boolean ignoreLoginSuccess)

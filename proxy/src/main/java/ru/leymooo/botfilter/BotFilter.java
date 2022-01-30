@@ -73,11 +73,6 @@ public class BotFilter
     {
         Settings.IMP.reload( new File( "BotFilter", "config.yml" ) );
         Scoreboard.DISABLE_DUBLICATE = Settings.IMP.FIX_SCOREBOARD_TEAMS;
-        checkForUpdates( startup );
-        if ( !CachedCaptcha.generated )
-        {
-            CaptchaGeneration.generateImages();
-        }
         normalState = getCheckState( Settings.IMP.PROTECTION.NORMAL );
         attackState = getCheckState( Settings.IMP.PROTECTION.ON_ATTACK );
         PacketUtils.init();
@@ -411,36 +406,36 @@ public class BotFilter
 
     private void checkForUpdates(boolean startup)
     {
-        Logger logger = BungeeCord.getInstance().getLogger();
-        try
-        {
-            logger.log( Level.INFO, "[BotFilter] Проверяю наличее обновлений" );
-            URL url = new URL( "https://raw.githubusercontent.com/Leymooo/BungeeCord/master/version.txt" );
-            URLConnection conn = url.openConnection();
-            conn.setConnectTimeout( 1200 );
-            conn.setReadTimeout( 1200 );
-            try ( BufferedReader in = new BufferedReader(
-                    new InputStreamReader( conn.getInputStream() ) ) )
-            {
-                if ( !in.readLine().trim().equalsIgnoreCase( Settings.IMP.BOT_FILTER_VERSION ) )
-                {
-
-                    logger.log( Level.INFO, "§c[BotFilter] §aНайдена новая версия!" );
-                    logger.log( Level.INFO, "§c[BotFilter] §aПожалуйста обновитесь!" );
-                    logger.log( Level.INFO, "§c[BotFilter] §ahttp://rubukkit.org/threads/137038" );
-                    if ( startup )
-                    {
-                        Thread.sleep( 3500L );
-                    }
-                } else
-                {
-                    logger.log( Level.INFO, "[BotFilter] Обновлений не найдено!" );
-                }
-            }
-        } catch ( IOException | InterruptedException ex )
-        {
-            logger.log( Level.WARNING, "[BotFilter] Не могу проверить обновление", ex );
-        }
+//        Logger logger = BungeeCord.getInstance().getLogger();
+//        try
+//        {
+//            logger.log( Level.INFO, "[BotFilter] Проверяю наличее обновлений" );
+//            URL url = new URL( "https://raw.githubusercontent.com/Leymooo/BungeeCord/master/version.txt" );
+//            URLConnection conn = url.openConnection();
+//            conn.setConnectTimeout( 1200 );
+//            conn.setReadTimeout( 1200 );
+//            try ( BufferedReader in = new BufferedReader(
+//                    new InputStreamReader( conn.getInputStream() ) ) )
+//            {
+//                if ( !in.readLine().trim().equalsIgnoreCase( Settings.IMP.BOT_FILTER_VERSION ) )
+//                {
+//
+//                    logger.log( Level.INFO, "§c[BotFilter] §aНайдена новая версия!" );
+//                    logger.log( Level.INFO, "§c[BotFilter] §aПожалуйста обновитесь!" );
+//                    logger.log( Level.INFO, "§c[BotFilter] §ahttp://rubukkit.org/threads/137038" );
+//                    if ( startup )
+//                    {
+//                        Thread.sleep( 3500L );
+//                    }
+//                } else
+//                {
+//                    logger.log( Level.INFO, "[BotFilter] Обновлений не найдено!" );
+//                }
+//            }
+//        } catch ( IOException | InterruptedException ex )
+//        {
+//            logger.log( Level.WARNING, "[BotFilter] Не могу проверить обновление", ex );
+//        }
     }
 
     public static enum CheckState

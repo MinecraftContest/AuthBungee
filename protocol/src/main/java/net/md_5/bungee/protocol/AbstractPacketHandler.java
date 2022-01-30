@@ -38,10 +38,7 @@ import net.md_5.bungee.protocol.packet.Team;
 import net.md_5.bungee.protocol.packet.Title;
 import net.md_5.bungee.protocol.packet.TitleTimes;
 import net.md_5.bungee.protocol.packet.ViewDistance;
-import ru.leymooo.botfilter.packets.Player;
-import ru.leymooo.botfilter.packets.PlayerPosition;
-import ru.leymooo.botfilter.packets.PlayerPositionAndLook;
-import ru.leymooo.botfilter.packets.TeleportConfirm;
+import ru.leymooo.botfilter.packets.*;
 
 public abstract class AbstractPacketHandler
 {

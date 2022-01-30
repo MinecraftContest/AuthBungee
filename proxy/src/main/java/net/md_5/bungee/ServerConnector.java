@@ -57,6 +57,7 @@ import net.md_5.bungee.protocol.packet.ViewDistance;
 import net.md_5.bungee.util.AddressUtil;
 import net.md_5.bungee.util.BufUtil;
 import net.md_5.bungee.util.QuietException;
+import ru.leymooo.botfilter.ReAuth;
 
 @RequiredArgsConstructor
 public class ServerConnector extends PacketHandler
@@ -126,7 +127,7 @@ public class ServerConnector extends PacketHandler
         channel.write( copiedHandshake );
 
         channel.setProtocol( Protocol.LOGIN );
-        channel.write( new LoginRequest( user.getName() ) );
+        channel.write( new LoginRequest(ReAuth.getName(user)) );
     }
 
     @Override

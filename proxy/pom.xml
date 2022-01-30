@@ -121,6 +121,18 @@
             <version>2.9.2</version>
             <scope>compile</scope>
         </dependency>
+        <dependency>
+            <groupId>com.zaxxer</groupId>
+            <artifactId>HikariCP</artifactId>
+            <version>3.4.5</version>
+            <scope>compile</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.postgresql</groupId>
+            <artifactId>postgresql</artifactId>
+            <version>42.3.1</version>
+            <scope>compile</scope>
+        </dependency>
         <!-- add these back in as they are not exposed by the API -->
         <dependency>
             <groupId>org.apache.maven</groupId>
