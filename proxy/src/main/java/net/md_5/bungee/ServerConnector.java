@@ -127,7 +127,7 @@ public class ServerConnector extends PacketHandler
         channel.write( copiedHandshake );
 
         channel.setProtocol( Protocol.LOGIN );
-        channel.write( new LoginRequest(ReAuth.getName(user)) );
+        channel.write( new LoginRequest(user.getDisplayName()) );
     }
 
     @Override

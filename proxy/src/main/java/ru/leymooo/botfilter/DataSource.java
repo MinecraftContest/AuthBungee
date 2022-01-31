@@ -19,8 +19,6 @@ public class DataSource {
 
         Properties props = new Properties();
 
-        PGSimpleDataSource d;
-
         props.setProperty("dataSourceClassName", "org.postgresql.ds.PGSimpleDataSource");
         props.setProperty("dataSource.user", Settings.IMP.AUTH_DB.DB_USER);
         props.setProperty("dataSource.password", Settings.IMP.AUTH_DB.DB_PASSWORD);

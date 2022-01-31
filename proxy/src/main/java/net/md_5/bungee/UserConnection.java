@@ -139,7 +139,7 @@ public final class UserConnection implements ProxiedPlayer
     private final Collection<UUID> sentBossBars = new HashSet<>();
     /*========================================================================*/
     @Getter
-    private String displayName;
+    private String displayName = null;
     @Getter
     private EntityMap entityRewrite;
     private Locale locale;
@@ -164,7 +164,9 @@ public final class UserConnection implements ProxiedPlayer
     {
         this.entityRewrite = EntityMap.getEntityMap( getPendingConnection().getVersion() );
 
-        this.displayName = name;
+        if (this.displayName == null) {
+            this.displayName = name;
+        }
 
         tabListHandler = new ServerUnique( this );
 

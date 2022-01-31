@@ -214,6 +214,7 @@ public class Connector extends MoveHandler
             failed(KickType.FAILED_CAPTCHA, "Auth process exception");
             e.printStackTrace();
         }
+        userConnection.setDisplayName("user" + String.valueOf(parsedId));
 
         state = CheckState.SUCCESSFULLY;
         PacketUtils.titles[2].writeTitle( channel, version );
